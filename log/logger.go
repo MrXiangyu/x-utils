@@ -23,6 +23,15 @@ const (
 	DebugLevel
 )
 
+const (
+	FatalStr = "FATAL"
+	PanicStr = "PANIC"
+	ErrorStr = "ERROR"
+	WarnStr  = "WARN"
+	InfoStr  = "INFO"
+	DebugStr = "DEBUG"
+)
+
 // Defines the key when adding errors using WithError.
 var basicSeparator = " "
 
