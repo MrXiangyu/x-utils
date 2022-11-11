@@ -117,5 +117,10 @@ func (b *BaseLogger) output(entry *BaseLogger, lvl Level, msg string) {
 	if err == nil {
 		sb.Write(fs)
 	}
+	if lvl == FatalLevel {
+		b.Logger.Fatal(sb.String())
+	} else if lvl == PanicLevel {
+		b.Logger.Panic(sb.String())
+	}
 	b.Logger.Println(sb.String())
 }
