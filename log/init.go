@@ -12,6 +12,6 @@ func New(prefix string) Entry {
 	entry := &BaseLogger{
 		Logger: log.New(os.Stderr, "", 0),
 	}
-	entry.WithField("prefiix", prefix)
+	entry.WithField("prefix", prefix)
 	return entry
 }
