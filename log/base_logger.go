@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"runtime"
 	"strings"
 	"time"
 )
@@ -93,6 +94,8 @@ func (b *BaseLogger) Debug(format string, v ...interface{}) {
 }
 
 func (b *BaseLogger) log(level Level, format string, v []interface{}) {
+	_, file, line, _ := runtime.Caller(2)
+	b.WithField("file", fmt.Sprintf("%s, line:%d", file, line))
 	if level > b.getLevel() {
 		return
 	}
