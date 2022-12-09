@@ -11,6 +11,7 @@ import (
 	"os"
 	"runtime"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -19,6 +20,7 @@ type BaseLogger struct {
 	Level  Level
 	Fields map[string]interface{}
 	Ctx    context.Context
+	lock   sync.Mutex
 }
 
 var ErrorKer = "error"
@@ -46,6 +48,8 @@ func (b *BaseLogger) WithField(key string, value interface{}) Entry {
 }
 
 func (b *BaseLogger) WithFields(fields map[string]interface{}) Entry {
+	b.lock.Lock()
+	defer b.lock.Unlock()
 	data := make(map[string]interface{}, len(b.Fields)+len(fields))
 	for k, v := range b.Fields {
 		data[k] = v
